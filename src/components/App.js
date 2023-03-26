@@ -117,15 +117,15 @@ function evaluate(state) {
     return computation.toString();
 }
 
-let NUMBER_FORMATTER = Intl.NumberFormat('en-us',{
-    maximumFractionDigits:0,
+let NUMBER_FORMATTER = Intl.NumberFormat('en-us', {
+    maximumFractionDigits: 0,
 })
 
-function formateOperand(operand){
-    if(operand == null) return;
-    const [integer,decimal] = operand.split('.');
-    if(decimal == null ) return NUMBER_FORMATTER.format(integer)
-    
+function formateOperand(operand) {
+    if (operand == null) return;
+    const [integer, decimal] = operand.split('.');
+    if (decimal == null) return NUMBER_FORMATTER.format(integer)
+    return `${NUMBER_FORMATTER.format(integer)}.${decimal}`;
 }
 
 const App = () => {
@@ -135,8 +135,8 @@ const App = () => {
     return (
         <div className='calculator-grid'>
             <div className="output">
-                <div className="previous-operand">{previousOperand} {operation}</div>
-                <div className="current-operand">{currentOperand}</div>
+                <div className="previous-operand">{formateOperand(previousOperand)} {operation}</div>
+                <div className="current-operand">{formateOperand(currentOperand)}</div>
             </div>
             <button className="span-two" onClick={() => dispatch({ type: ACTIONS.CLEAR })}>AC</button>
             <button onClick={() => dispatch({ type: ACTIONS.DELETE })}>DEL</button>
